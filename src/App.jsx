@@ -14,15 +14,16 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
-    fetch('https://api.quotable.io/random')
+    fetch('https://type.fit/api/quotes')
       .then((res) => res.json())
       .then((data) => {
-        setQuote(data.content);
-        setIsLoading(false); 
+        const random = data[Math.floor(Math.random() * data.length)];
+        setQuote(random.text || '“Measure twice, cut once.”');
+        setIsLoading(false);
       })
       .catch(() => {
         setQuote('“Measure twice, cut once.”'); 
-        setIsLoading(false); 
+        setIsLoading(false);
       });
   }, []);
 
@@ -58,8 +59,6 @@ const App = () => {
           <div className="welcome-content">
             <h1>🏠 Room Calculator</h1>
             <p>Click anywhere to start calculating! 🧮</p>
-
-            {/* Display a loading spinner or fallback quote */}
             {isLoading ? (
               <div className="loading-spinner">🔄</div> 
             ) : (
@@ -72,15 +71,11 @@ const App = () => {
           <Header />
           <main className="main-content">
             <RoomTypeSelector onSelect={handleRoomTypeSelect} selectedRoom={roomType} />
-            
-            {/* Show the selected room type */}
             {roomType && (
               <div className="room-selection">
                 <h3>You selected: {roomType === 'bathroom' ? '🚿 Bathroom' : '🛏️ Regular Room'}</h3>
               </div>
             )}
-            
-            {/* Show the DimensionForm and Results */}
             {roomType && <DimensionForm onCalculate={handleCalculate} />}
             {results.paintArea && <Results results={results} />}
           </main>
