@@ -20,7 +20,6 @@ const RoomTypeSelector = ({ onSelect, selectedRoom }) => (
       </button>
     </div>
 
-    {/* Display selected room type */}
     {selectedRoom && (
       <div className="selected-room">
         <h3>You selected: {selectedRoom === 'bathroom' ? '🚿 Bathroom' : '🛏️ Regular Room'}</h3>

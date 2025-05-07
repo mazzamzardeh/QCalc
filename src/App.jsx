@@ -64,14 +64,12 @@ const App = () => {
     const plasterArea = wallArea;
     const baseboardLength = 2 * (length + width);
 
-    // Set the calculated results
     setResults({ paintArea, tileArea, plasterArea, baseboardLength });
   };
 
-  // Toggle unit between meters and feet
   const toggleUnit = () => {
     setUnit((prev) => (prev === 'm' ? 'ft' : 'm'));
-    setResults(null); // Reset results when unit is toggled
+    setResults(null); 
   };
 
   return (
